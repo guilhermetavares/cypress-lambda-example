@@ -2,8 +2,6 @@
 set -euo pipefail
 
 cypress_cache_dir=${CYPRESS_CACHE_FOLDER:="/opt/cypress"}
-
-
 for cypress_version_dir in "$cypress_cache_dir"/*; do
   cypress_electron_binary_location="$cypress_version_dir/Cypress/Cypress"
   # Patches cypress's electron binary to replace references to /dev/shm to /tmp/shm, as /dev/shm isn't writable on lambda
@@ -14,8 +12,6 @@ for cypress_version_dir in "$cypress_cache_dir"/*; do
   for i in $position; do
     echo -n "/tmp/shm/" | dd bs=1 of=$cypress_electron_binary_location seek="$i" conv=notrunc
   done
-
-
   # Patch `checkAccess` to not crash on EROFS,
   # without this patch you need to copy your cypress project dir to a writeable location
   # ie, /tmp/cypress-project you may want to do this if you want to upload saved screenshots or videos
