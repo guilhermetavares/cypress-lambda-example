@@ -11,6 +11,7 @@ similar(although not identical) to how it would be run from lambda.
 Once the image is built you will have to push it to an ECR repo, and create your lambda function.
 A lambda with 2GB of ram seems to work ok.
 
+
 ### Using SAM
 A basic SAM template is included, with which you can deploy the lambda
 ```bash
@@ -19,6 +20,7 @@ sam build
 # Interactive deployment wizard
 sam deploy --guided
 ```
+
 
 ## Things of note
 If you want to save screenshots or video, you may need to run the project from the tmp dir, 
